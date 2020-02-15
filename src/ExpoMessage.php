@@ -56,6 +56,14 @@ class ExpoMessage
      */
     protected $jsonData = '{}';
 
+
+    /**
+     * Whether or not to display notifications when the app is in the foreground on iOS.
+     *
+     * @var bool
+     */
+    protected $displayInForeground = false;
+
     /**
      * Create a message with given body.
      *
@@ -199,6 +207,20 @@ class ExpoMessage
     }
 
     /**
+     * Set the _displayInForeground of the notification for iOS devices.
+     *
+     * @param bool $show
+     *
+     * @return $this
+     */
+    public function setDisplayInForeground($show)
+    {
+        $this->displayInForeground = $show;
+
+        return $this;
+    }
+
+    /**
      * Get an array representation of the message.
      *
      * @return array
@@ -212,6 +234,7 @@ class ExpoMessage
             'badge'     =>  $this->badge,
             'ttl'       =>  $this->ttl,
             'data'      =>  $this->jsonData,
+            '_displayInForeground' => $this->displayInForeground
         ];
         if (! empty($this->channelId)) {
             $message['channelId'] = $this->channelId;
