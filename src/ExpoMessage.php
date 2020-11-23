@@ -223,6 +223,8 @@ class ExpoMessage
     public function setDisplayInForeground($show)
     {
         $this->displayInForeground = $show;
+
+        return $this;
     }
 
     /**
