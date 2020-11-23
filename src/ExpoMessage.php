@@ -65,6 +65,13 @@ class ExpoMessage
     protected $displayInForeground = false;
 
     /**
+     * The priority of notification message for Android devices.
+     *
+     * @var string
+     */
+    protected $priority = 'default';
+
+    /**
      * Create a message with given body.
      *
      * @param string $body
@@ -216,6 +223,18 @@ class ExpoMessage
     public function setDisplayInForeground($show)
     {
         $this->displayInForeground = $show;
+    }
+
+    /**
+     *  Set the priority of the notification, must be one of [default, normal, high].
+     *
+     * @param string $priority
+     *
+     * @return $this
+     */
+    public function priority(string $priority)
+    {
+        $this->priority = $priority;
 
         return $this;
     }
@@ -234,8 +253,10 @@ class ExpoMessage
             'badge'     =>  $this->badge,
             'ttl'       =>  $this->ttl,
             'data'      =>  $this->jsonData,
-            '_displayInForeground' => $this->displayInForeground
+            '_displayInForeground' => $this->displayInForeground,
+            'priority'  =>  $this->priority,
         ];
+
         if (! empty($this->channelId)) {
             $message['channelId'] = $this->channelId;
         }
