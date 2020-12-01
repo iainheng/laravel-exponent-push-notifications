@@ -48,5 +48,7 @@
                 "NotificationChannels\\ExpoPushNotifications\\ExpoPushNotificationsServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
