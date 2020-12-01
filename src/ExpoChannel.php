@@ -48,6 +48,11 @@ class ExpoChannel
         $interest = $notifiable->routeNotificationFor('ExpoPushNotifications')
             ?: $this->interestName($notifiable);
 
+        // make sure interest is array before passing to notify()
+        if (is_string($interest)) {
+            $interest = [$interest];
+        }
+
         try {
             $this->expo->notify(
                 $interest,
