@@ -30,6 +30,9 @@ class ExpoPushNotificationsServiceProvider extends ServiceProvider
                 return new Expo(new ExpoRegistrar($repository));
             });
 
+        $router = $this->app['router'];
+        $router->middlewareGroup('expo.middleware', config('exponent-push-notifications')['middleware']);
+
         $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
     }
 
@@ -78,8 +81,7 @@ class ExpoPushNotificationsServiceProvider extends ServiceProvider
     /**
      * Publishes the migration files needed in the package.
      *
-     * @param ExpoRepository $repository
-     *
+     * @param  ExpoRepository  $repository
      * @return void
      */
     private function shouldPublishMigrations(ExpoRepository $repository)

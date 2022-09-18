@@ -26,8 +26,7 @@ class ExpoControllerTest extends TestCase
     /**
      * Sets up the expo controller with the given expo channel.
      *
-     * @param ExpoRepository $expoRepository
-     *
+     * @param  ExpoRepository  $expoRepository
      * @return array
      */
     protected function setupExpo(ExpoRepository $expoRepository)
@@ -38,7 +37,7 @@ class ExpoControllerTest extends TestCase
         return [$expoController, $expoChannel];
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -48,7 +47,7 @@ class ExpoControllerTest extends TestCase
         Auth::shouldReceive('user')->andReturn(new User());
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         \Mockery::close();
 
@@ -68,7 +67,8 @@ class ExpoControllerTest extends TestCase
         ];
     }
 
-    /** @test
+    /**
+     * @test
      *
      * @param $expoRepository
      *
@@ -102,7 +102,8 @@ class ExpoControllerTest extends TestCase
         }
     }
 
-    /** @test
+    /**
+     * @test
      *
      * @param $expoRepository
      *
@@ -149,7 +150,8 @@ class ExpoControllerTest extends TestCase
         $this->assertEquals('failed', $response->status);
     }
 
-    /** @test
+    /**
+     * @test
      *
      *
      * @dataProvider availableRepositories
@@ -186,7 +188,8 @@ class ExpoControllerTest extends TestCase
         }
     }
 
-    /** @test
+    /**
+     * @test
      *
      * @param $expoRepository
      *
@@ -238,7 +241,6 @@ class ExpoControllerTest extends TestCase
      * Mocks a request for the ExpoController.
      *
      * @param $data
-     *
      * @return \Mockery\MockInterface
      */
     public function mockRequest($data)
@@ -250,8 +252,7 @@ class ExpoControllerTest extends TestCase
     }
 
     /**
-     * @param bool $fails
-     *
+     * @param  bool  $fails
      * @return \Mockery\MockInterface
      */
     public function mockValidator(bool $fails)

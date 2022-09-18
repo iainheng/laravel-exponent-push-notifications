@@ -12,7 +12,6 @@ class ExpoDatabaseDriver implements ExpoRepository
      *
      * @param $key
      * @param $value
-     *
      * @return bool
      */
     public function store($key, $value): bool
@@ -28,8 +27,7 @@ class ExpoDatabaseDriver implements ExpoRepository
     /**
      * Retrieves an Expo token with a given identifier.
      *
-     * @param string $key
-     *
+     * @param  string  $key
      * @return array
      */
     public function retrieve(string $key)
@@ -40,9 +38,8 @@ class ExpoDatabaseDriver implements ExpoRepository
     /**
      * Removes an Expo token with a given identifier.
      *
-     * @param string $key
-     * @param string $value
-     *
+     * @param  string  $key
+     * @param  string  $value
      * @return bool
      */
     public function forget(string $key, string $value = null): bool

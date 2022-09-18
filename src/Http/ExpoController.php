@@ -19,7 +19,7 @@ class ExpoController extends Controller
     /**
      * ExpoController constructor.
      *
-     * @param ExpoChannel $expoChannel
+     * @param  ExpoChannel  $expoChannel
      */
     public function __construct(ExpoChannel $expoChannel)
     {
@@ -29,8 +29,7 @@ class ExpoController extends Controller
     /**
      * Handles subscription endpoint for an expo token.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function subscribe(Request $request)
@@ -40,7 +39,7 @@ class ExpoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return JsonResponse::create([
+            return new JsonResponse([
                 'status' => 'failed',
                 'error' => [
                     'message' => 'Expo Token is required',
@@ -55,7 +54,7 @@ class ExpoController extends Controller
         try {
             $this->expoChannel->expo->subscribe($interest, $token);
         } catch (\Exception $e) {
-            return JsonResponse::create([
+            return new JsonResponse([
                 'status'    => 'failed',
                 'error'     =>  [
                     'message' => $e->getMessage(),
@@ -63,7 +62,7 @@ class ExpoController extends Controller
             ], 500);
         }
 
-        return JsonResponse::create([
+        return new JsonResponse([
             'status'    =>  'succeeded',
             'expo_token' => $token,
         ], 200);
@@ -72,8 +71,7 @@ class ExpoController extends Controller
     /**
      * Handles removing subscription endpoint for the authenticated interest.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function unsubscribe(Request $request)
@@ -85,7 +83,7 @@ class ExpoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return JsonResponse::create([
+            return new JsonResponse([
                 'status' => 'failed',
                 'error' => [
                     'message' => 'Expo Token is invalid',
@@ -98,7 +96,7 @@ class ExpoController extends Controller
         try {
             $deleted = $this->expoChannel->expo->unsubscribe($interest, $token);
         } catch (\Exception $e) {
-            return JsonResponse::create([
+            return new JsonResponse([
                 'status'    => 'failed',
                 'error'     =>  [
                     'message' => $e->getMessage(),
@@ -106,6 +104,6 @@ class ExpoController extends Controller
             ], 500);
         }
 
-        return JsonResponse::create(['deleted' => $deleted]);
+        return new JsonResponse(['deleted' => $deleted]);
     }
 }

@@ -24,8 +24,8 @@ class ExpoChannel
     /**
      * ExpoChannel constructor.
      *
-     * @param Expo $expo
-     * @param Dispatcher $events
+     * @param  Expo  $expo
+     * @param  Dispatcher  $events
      */
     public function __construct(Expo $expo, Dispatcher $events)
     {
@@ -36,26 +36,22 @@ class ExpoChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param  mixed  $notifiable
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return void
      *
      * @throws CouldNotSendNotification
-     *
-     * @return void
      */
     public function send($notifiable, Notification $notification)
     {
         $interest = $notifiable->routeNotificationFor('ExpoPushNotifications')
             ?: $this->interestName($notifiable);
 
-        // make sure interest is array before passing to notify()
-        if (is_string($interest)) {
-            $interest = [$interest];
-        }
+        $interests = [$interest];
 
         try {
             $this->expo->notify(
-                $interest,
+                $interests,
                 $notification->toExpoPush($notifiable)->toArray(),
                 config('exponent-push-notifications.debug')
             );
@@ -70,7 +66,6 @@ class ExpoChannel
      * Get the interest name for the notifiable.
      *
      * @param $notifiable
-     *
      * @return string
      */
     public function interestName($notifiable)

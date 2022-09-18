@@ -74,8 +74,7 @@ class ExpoMessage
     /**
      * Create a message with given body.
      *
-     * @param string $body
-     *
+     * @param  string  $body
      * @return static
      */
     public static function create($body = '')
@@ -86,7 +85,7 @@ class ExpoMessage
     /**
      * ExpoMessage constructor.
      *
-     * @param string $body
+     * @param  string  $body
      */
     public function __construct(string $body = '')
     {
@@ -96,8 +95,7 @@ class ExpoMessage
     /**
      * Set the message title.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function title(string $value)
@@ -110,8 +108,7 @@ class ExpoMessage
     /**
      * Set the message body.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function body(string $value)
@@ -148,8 +145,7 @@ class ExpoMessage
     /**
      * Set the message badge (iOS).
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function badge(int $value)
@@ -162,8 +158,7 @@ class ExpoMessage
     /**
      * Set the time to live of the notification.
      *
-     * @param int $ttl
-     *
+     * @param  int  $ttl
      * @return $this
      */
     public function setTtl(int $ttl)
@@ -176,8 +171,7 @@ class ExpoMessage
     /**
      * Set the channelId of the notification for Android devices.
      *
-     * @param string $channelId
-     *
+     * @param  string  $channelId
      * @return $this
      */
     public function setChannelId(string $channelId)
@@ -190,8 +184,7 @@ class ExpoMessage
     /**
      * Set the json Data attached to the message.
      *
-     * @param array|string $data
-     *
+     * @param  array|string  $data
      * @return $this
      *
      * @throws CouldNotCreateMessage
@@ -230,8 +223,7 @@ class ExpoMessage
     /**
      *  Set the priority of the notification, must be one of [default, normal, high].
      *
-     * @param string $priority
-     *
+     * @param  string  $priority
      * @return $this
      */
     public function priority(string $priority)

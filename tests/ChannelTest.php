@@ -39,7 +39,7 @@ class ChannelTest extends TestCase
      */
     protected $notifiable;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -54,7 +54,7 @@ class ChannelTest extends TestCase
         $this->notifiable = new TestNotifiable;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 
@@ -68,7 +68,7 @@ class ChannelTest extends TestCase
 
         $data = $message->toArray();
 
-        $this->expo->shouldReceive('notify')->with('interest_name', $data, true)->andReturn([['status' => 'ok']]);
+        $this->expo->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn([['status' => 'ok']]);
 
         $this->channel->send($this->notifiable, $this->notification);
     }
@@ -80,7 +80,7 @@ class ChannelTest extends TestCase
 
         $data = $message->toArray();
 
-        $this->expo->shouldReceive('notify')->with('interest_name', $data, true)->andThrow(ExpoException::class, '');
+        $this->expo->shouldReceive('notify')->with(['interest_name'], $data, true)->andThrow(ExpoException::class, '');
 
         $this->events->shouldReceive('dispatch')->with(Mockery::type(NotificationFailed::class));
 
